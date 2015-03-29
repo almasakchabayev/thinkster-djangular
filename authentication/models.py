@@ -34,9 +34,10 @@ class Account(AbstractBaseUser):
 
     first_name = models.CharField(max_length=40, blank=True)
     last_name = models.CharField(max_length=40, blank=True)
-    tagline = models.CharField(max_length=40, blank=True)
+    tagline = models.CharField(max_length=140, blank=True)
 
     is_admin = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -46,7 +47,7 @@ class Account(AbstractBaseUser):
     REQUIRED_FIELDS = ['username']
 
     def __unicode__(self):
-        return self.main
+        return self.email
 
     def get_full_name(self):
         return ' '.join([self.first_name, self.last_name])

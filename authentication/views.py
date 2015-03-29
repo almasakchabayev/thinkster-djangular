@@ -6,7 +6,7 @@ from authentication.permissions import IsAccountOwner
 from authentication.serializers import AccountSerializer
 
 
-class AccountVuewSet(viewsets.ModelViewSet):
+class AccountViewSet(viewsets.ModelViewSet):
     lookup_field = 'username'
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
@@ -18,7 +18,7 @@ class AccountVuewSet(viewsets.ModelViewSet):
         if self.request.method == 'POST':
             return (permissions.AllowAny(),)
 
-        return (permissions.IsAuthenticated, IsAccountOwner(),)
+        return (permissions.IsAuthenticated(), IsAccountOwner(),)
 
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -29,6 +29,6 @@ class AccountVuewSet(viewsets.ModelViewSet):
             return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
 
         return Response({
-            'status': 'Bad Request',
-            'message': 'Account could not be created wuth received data'
+            'status': 'Bad request',
+            'message': 'Account could not be created with received data.'
         }, status=status.HTTP_400_BAD_REQUEST)
