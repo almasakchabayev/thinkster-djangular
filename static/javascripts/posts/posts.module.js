@@ -12,7 +12,7 @@
         .module('thinkster.posts.controllers', []);
 
     angular
-        .module('thinkster.posts.directives', []);
+        .module('thinkster.posts.directives', ['ngDialog']);
 
     angular
         .module('thinkster.posts.services', []);
